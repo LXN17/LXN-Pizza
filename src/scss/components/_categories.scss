@@ -3,8 +3,10 @@
 .categories {
   ul {
     display: flex;
+    flex-wrap: wrap;
 
     li {
+      margin-top: 10px;
       background-color: #f9f9f9;
       padding: 13px 30px;
       border-radius: 30px;
@@ -27,5 +29,7 @@
         color: #fff;
       }
     }
+  }
+  @media (max-width: 1300px) {
   }
 }

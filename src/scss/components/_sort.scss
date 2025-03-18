@@ -1,7 +1,6 @@
 @import "../variables";
 
 .sort {
-  
   position: relative;
   &__label {
     display: flex;
@@ -13,9 +12,11 @@
 
     b {
       margin-right: 8px;
+      text-wrap: nowrap;
     }
 
     span {
+      user-select: none;
       color: $orange;
       border-bottom: 1px dashed $orange;
       cursor: pointer;
@@ -36,6 +37,7 @@
     ul {
       overflow: hidden;
       li {
+        user-select: none;
         padding: 12px 20px;
         cursor: pointer;
 

@@ -1,6 +1,14 @@
 import { useState } from "react";
 
-const PizzaBlock = ({ cartCount,setCartCount,title, price, imageUrl, types, sizes }) => {
+const PizzaBlock = ({
+  cartCount,
+  setCartCount,
+  title,
+  price,
+  imageUrl,
+  types,
+  sizes,
+}) => {
   const typeNames = ["тонкое", "традиционное"];
 
   const [activeType, setActiveType] = useState(types[0]);
@@ -18,9 +26,9 @@ const PizzaBlock = ({ cartCount,setCartCount,title, price, imageUrl, types, size
       <h4 className="pizza-block__title">{title}</h4>
       <div className="pizza-block__selector">
         <ul>
-          {types.map((type,index) => (
+          {types.map((type, index) => (
             <li
-            key={index}
+              key={index}
               onClick={() => {
                 setActiveType(types[type]);
               }}
@@ -31,9 +39,9 @@ const PizzaBlock = ({ cartCount,setCartCount,title, price, imageUrl, types, size
           ))}
         </ul>
         <ul>
-          {sizes.map((size,index) => (
+          {sizes.map((size, index) => (
             <li
-            key={index}
+              key={index}
               onClick={() => {
                 setActiveSize(size);
               }}
@@ -47,8 +55,9 @@ const PizzaBlock = ({ cartCount,setCartCount,title, price, imageUrl, types, size
       <div className="pizza-block__bottom">
         <div className="pizza-block__price">от {price} ₽</div>
         <div
-          onClick={()=>{changePizzaCount();
-            setCartCount(prev=>prev+1)
+          onClick={() => {
+            changePizzaCount();
+            setCartCount((prev) => prev + 1);
           }}
           className="button button--outline button--add"
         >
