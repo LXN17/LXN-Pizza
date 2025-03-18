@@ -23,6 +23,7 @@ const Categories = () => {
           <li
             onClick={() => changePizzaCategory(index)}
             className={pizzaCategory === index ? "active" : ""}
+            key={index}
           >
             {category}
           </li>

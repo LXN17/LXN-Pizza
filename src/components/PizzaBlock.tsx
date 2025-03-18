@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const PizzaBlock = ({ title, price, imageUrl, types, sizes }) => {
+const PizzaBlock = ({ cartCount,setCartCount,title, price, imageUrl, types, sizes }) => {
   const typeNames = ["тонкое", "традиционное"];
 
   const [activeType, setActiveType] = useState(types[0]);
@@ -18,8 +18,9 @@ const PizzaBlock = ({ title, price, imageUrl, types, sizes }) => {
       <h4 className="pizza-block__title">{title}</h4>
       <div className="pizza-block__selector">
         <ul>
-          {types.map((type) => (
+          {types.map((type,index) => (
             <li
+            key={index}
               onClick={() => {
                 setActiveType(types[type]);
               }}
@@ -30,8 +31,9 @@ const PizzaBlock = ({ title, price, imageUrl, types, sizes }) => {
           ))}
         </ul>
         <ul>
-          {sizes.map((size) => (
+          {sizes.map((size,index) => (
             <li
+            key={index}
               onClick={() => {
                 setActiveSize(size);
               }}
@@ -45,7 +47,9 @@ const PizzaBlock = ({ title, price, imageUrl, types, sizes }) => {
       <div className="pizza-block__bottom">
         <div className="pizza-block__price">от {price} ₽</div>
         <div
-          onClick={changePizzaCount}
+          onClick={()=>{changePizzaCount();
+            setCartCount(prev=>prev+1)
+          }}
           className="button button--outline button--add"
         >
           <svg

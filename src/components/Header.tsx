@@ -1,6 +1,6 @@
 import logo from "../assets/img/pizza-logo.svg";
 
-const Header = () => {
+const Header = ({cartCount}) => {
   return (
     <div className="header">
       <div className="container">
@@ -44,7 +44,7 @@ const Header = () => {
                 strokeLinejoin="round"
               />
             </svg>
-            <span>3</span>
+            <span>{cartCount}</span>
           </a>
         </div>
       </div>
