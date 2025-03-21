@@ -1,11 +1,15 @@
 import { useState } from "react";
 
-const Sort = () => {
+const Sort = ({ selectedFilter, setSelectedFilter }) => {
+  // const [selectedFilter, setSelectedFilter] = useState("популярности");
   const [isOpen, setIsOpen] = useState(false);
 
-  const [selectedFilter, setSelectedFilter] = useState("популярности");
-
-  const filterArr = ["популярности", "цене", "алфавиту"];
+  const filterArr = [
+    { name: "популярности", sort: "rating" },
+    { name: "цене (по убыванию)", sort: `price&order=desc` },
+    { name: "цене (по возрастанию)", sort: "price&order=asc" },
+    { name: "алфавиту", sort: "title" },
+  ];
 
   function popupMenuHandler() {
     setIsOpen((prev) => !prev);
@@ -29,7 +33,7 @@ const Sort = () => {
           </svg>
         )}
         <b>Сортировка по:</b>
-        <span onClick={popupMenuHandler}>{selectedFilter}</span>
+        <span onClick={popupMenuHandler}>{selectedFilter.name}</span>
       </div>
 
       {isOpen && (
@@ -41,10 +45,10 @@ const Sort = () => {
                   popupMenuHandler();
                   setSelectedFilter(filterArr[index]);
                 }}
-                className={filter === selectedFilter ? "active" : ""}
+                className={filter.name === selectedFilter.name ? "active" : ""}
                 key={index}
               >
-                {filter}
+                {filter.name}
               </li>
             ))}
           </ul>

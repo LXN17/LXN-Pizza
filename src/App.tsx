@@ -13,18 +13,14 @@ function App() {
     <div className="wrapper">
       <Header cartCount={cartCount} />
       <div className="content">
-        <div className="container">
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Home cartCount={cartCount} setCartCount={setCartCount} />
-              }
-            />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </div>
+        <Routes>
+          <Route
+            path="/"
+            element={<Home cartCount={cartCount} setCartCount={setCartCount} />}
+          />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </div>
     </div>
   );

@@ -1,0 +1,32 @@
+.root {
+  display: flex;
+  gap: 5px;
+  .selected {
+    background-color: black;
+  }
+  :global {
+    .selected {
+      background-color: #ee0a3d;
+      a {
+        color: white;
+      }
+    }
+  }
+  li {
+    a {
+      color: #ee0a3d;
+      font-weight: bold;
+      font-size: large;
+      height: 40px;
+      width: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    cursor: pointer;
+    border: 1px solid #ee0a3d;
+
+    border-radius: 50%;
+  }
+}
