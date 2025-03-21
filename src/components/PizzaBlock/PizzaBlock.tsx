@@ -1,14 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 
-const PizzaBlock = ({
-  cartCount,
-  setCartCount,
-  title,
-  price,
-  imageUrl,
-  types,
-  sizes,
-}) => {
+import { SearchContext } from "../../App";
+
+const PizzaBlock = ({ title, price, imageUrl, types, sizes }) => {
+  const { setCartCount } = useContext(SearchContext);
   const typeNames = ["тонкое", "традиционное"];
 
   const [activeType, setActiveType] = useState(types[0]);
@@ -26,7 +21,7 @@ const PizzaBlock = ({
       <h4 className="pizza-block__title">{title}</h4>
       <div className="pizza-block__selector">
         <ul>
-          {types.map((type, index) => (
+          {types.map((type: number, index: number) => (
             <li
               key={index}
               onClick={() => {
@@ -39,7 +34,7 @@ const PizzaBlock = ({
           ))}
         </ul>
         <ul>
-          {sizes.map((size, index) => (
+          {sizes.map((size: number, index: number) => (
             <li
               key={index}
               onClick={() => {
@@ -57,7 +52,7 @@ const PizzaBlock = ({
         <div
           onClick={() => {
             changePizzaCount();
-            setCartCount((prev) => prev + 1);
+            setCartCount((prev: number) => prev + 1);
           }}
           className="button button--outline button--add"
         >

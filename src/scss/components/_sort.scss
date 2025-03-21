@@ -17,8 +17,8 @@
 
     span {
       user-select: none;
-      color: $orange;
-      border-bottom: 1px dashed $orange;
+      color: $red;
+      border-bottom: 1px dashed $red;
       cursor: pointer;
     }
     @media (max-width: 360px) {
@@ -54,7 +54,7 @@
 
         &.active {
           font-weight: bold;
-          color: $orange;
+          color: $red;
         }
       }
     }

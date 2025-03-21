@@ -6,11 +6,13 @@ import Skeleton from "../components/PizzaBlock/Skeleton";
 import Search from "../components/Search/Search";
 import Pagination from "../components/Pagination/Pagination";
 
-const Home = ({ cartCount, setCartCount }) => {
+const Home = () => {
   const contentRef = useRef(null);
+
   const scrollToContent = () => {
     contentRef.current?.scrollIntoView({ behavior: "smooth" });
   };
+
   const [pizzaCategory, setPizzaCategory] = useState(0);
   const [selectedFilter, setSelectedFilter] = useState({
     name: "популярности",
@@ -36,21 +38,13 @@ const Home = ({ cartCount, setCartCount }) => {
         setIsLoading(false);
       })
       .catch((error) => console.log("Error fetching data:", error));
-    scrollToContent();
   }, [pizzaCategory, selectedFilter, currentPage]);
 
   const pizzas = items
     .filter((item) =>
       item.title.toLowerCase().includes(searchValue.toLowerCase())
     )
-    .map((item) => (
-      <PizzaBlock
-        cartCount={cartCount}
-        setCartCount={setCartCount}
-        key={item.id}
-        {...item}
-      />
-    ));
+    .map((item) => <PizzaBlock key={item.id} {...item} />);
 
   const skeleton = [...new Array(6)].map((_, index) => (
     <Skeleton key={index} />
@@ -71,7 +65,11 @@ const Home = ({ cartCount, setCartCount }) => {
       <h2 className="content__title">Все пиццы</h2>
       <Search searchValue={searchValue} setSearchValue={setSearchValue} />
       <div className="content__items">{isLoading ? skeleton : pizzas}</div>
-      <Pagination pizzas={pizzas} setCurrentPage={setCurrentPage} />
+      <Pagination
+        scrollToContent={scrollToContent}
+        pizzas={pizzas}
+        setCurrentPage={setCurrentPage}
+      />
     </div>
   );
 };

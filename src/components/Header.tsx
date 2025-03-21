@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import logo from "../assets/img/pizza-logo.svg";
+import { SearchContext } from "../App";
+import { useContext } from "react";
 
-const Header = ({ cartCount }) => {
+const Header = () => {
+  const { cartCount, setCartCount } = useContext(SearchContext);
   return (
     <div className="header">
       <div className="container">
@@ -12,6 +15,7 @@ const Header = ({ cartCount }) => {
             <strong>Best pizza in the universe</strong>
           </div>
         </Link>
+
         <div className="header__cart">
           <Link to="/cart" className="button button--cart">
             <span>520 ₽</span>
@@ -45,6 +49,7 @@ const Header = ({ cartCount }) => {
                 strokeLinejoin="round"
               />
             </svg>
+
             <span>{cartCount}</span>
           </Link>
         </div>
