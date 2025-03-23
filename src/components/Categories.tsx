@@ -1,4 +1,4 @@
-const Categories = ({ pizzaCategory, setPizzaCategory }) => {
+const Categories = ({ category, setCategory }) => {
   const categories = [
     "Все",
     "Мясные",
@@ -11,13 +11,15 @@ const Categories = ({ pizzaCategory, setPizzaCategory }) => {
   return (
     <div className="categories">
       <ul>
-        {categories.map((category, i) => (
+        {categories.map((categoryName, i) => (
           <li
-            onClick={() => setPizzaCategory(i)}
-            className={pizzaCategory === i ? "active" : ""}
+            onClick={() => {
+              setCategory(i);
+            }}
+            className={category === i ? "active" : ""}
             key={i}
           >
-            {category}
+            {categoryName}
           </li>
         ))}
       </ul>

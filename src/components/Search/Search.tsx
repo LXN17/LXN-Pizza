@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import styles from "./Search.module.scss";
+import debounce from "lodash.debounce";
+import { SearchContext } from "../../pages/Home.tsx";
 
-const Search = ({ searchValue, setSearchValue }) => {
-  // const [value, setValue] = useState("");
+const Search = () => {
+  const { searchValue, setSearchValue } = useContext(SearchContext);
 
   const inputHandler = (event) => {
     setSearchValue(event.target.value);

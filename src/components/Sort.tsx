@@ -1,7 +1,11 @@
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setSortBy } from "../redux/slices/filterSlice.js";
 
-const Sort = ({ selectedFilter, setSelectedFilter }) => {
-  // const [selectedFilter, setSelectedFilter] = useState("популярности");
+const Sort = () => {
+  const sortBy = useSelector((state) => state.filter.sortBy);
+  const dispatch = useDispatch();
+
   const [isOpen, setIsOpen] = useState(false);
 
   const filterArr = [
@@ -33,7 +37,7 @@ const Sort = ({ selectedFilter, setSelectedFilter }) => {
           </svg>
         )}
         <b>Сортировка по:</b>
-        <span onClick={popupMenuHandler}>{selectedFilter.name}</span>
+        <span onClick={popupMenuHandler}>{sortBy.name}</span>
       </div>
 
       {isOpen && (
@@ -43,9 +47,9 @@ const Sort = ({ selectedFilter, setSelectedFilter }) => {
               <li
                 onClick={() => {
                   popupMenuHandler();
-                  setSelectedFilter(filterArr[index]);
+                  dispatch(setSortBy(filter));
                 }}
-                className={filter.name === selectedFilter.name ? "active" : ""}
+                className={filter.name === sortBy.name ? "active" : ""}
                 key={index}
               >
                 {filter.name}
