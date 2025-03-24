@@ -5,6 +5,7 @@ import { useContext } from "react";
 
 const Header = () => {
   const { cartCount, setCartCount } = useContext(SearchContext);
+
   return (
     <div className="header">
       <div className="container">
