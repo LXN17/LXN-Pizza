@@ -1,19 +1,37 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 
-import { SearchContext } from "../../App";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem } from "../../redux/slices/cartSlice.js";
 
-const PizzaBlock = ({ title, price, imageUrl, types, sizes }) => {
-  const { setCartCount } = useContext(SearchContext);
-  const typeNames = ["тонкое", "традиционное"];
+const typeNames = ["тонкое", "традиционное"];
 
+const PizzaBlock = ({ id, title, price, imageUrl, types, sizes }: any) => {
   const [activeType, setActiveType] = useState(types[0]);
   const [activeSize, setActiveSize] = useState(sizes[0]);
 
-  const [count, setCount] = useState(0);
+  const dispatch = useDispatch();
 
-  function changePizzaCount() {
-    setCount((prev) => prev + 1);
-  }
+  const cartItem = useSelector((state) =>
+    state.cart.items.find(
+      (obj) => obj.id === `${id}_${typeNames[activeType]}_${activeSize}`
+    )
+  );
+
+  const addedCount = cartItem ? cartItem.count : 0;
+
+  const onClickAdd = () => {
+    const item = {
+      // Уникальный ID, если пользователь выберет одну пиццу с разными свойствами
+      id: `${id}_${typeNames[activeType]}_${activeSize}`,
+      title,
+      price,
+      imageUrl,
+      type: typeNames[activeType],
+      size: activeSize,
+    };
+
+    dispatch(addItem(item));
+  };
 
   return (
     <div className="pizza-block">
@@ -50,10 +68,7 @@ const PizzaBlock = ({ title, price, imageUrl, types, sizes }) => {
       <div className="pizza-block__bottom">
         <div className="pizza-block__price">от {price} ₽</div>
         <div
-          onClick={() => {
-            changePizzaCount();
-            setCartCount((prev: number) => prev + 1);
-          }}
+          onClick={onClickAdd}
           className="button button--outline button--add"
         >
           <svg
@@ -69,7 +84,7 @@ const PizzaBlock = ({ title, price, imageUrl, types, sizes }) => {
             />
           </svg>
           <span>Добавить</span>
-          <i>{count}</i>
+          {addedCount > 0 && <i>{addedCount}</i>}
         </div>
       </div>
     </div>

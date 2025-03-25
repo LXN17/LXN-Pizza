@@ -1,15 +1,13 @@
+import { useEffect, useState, useRef, createContext } from "react";
 import Categories from "../components/Categories";
 import Sort from "../components/Sort";
 import PizzaBlock from "../components/PizzaBlock/PizzaBlock";
 import Skeleton from "../components/PizzaBlock/Skeleton";
 import Search from "../components/Search/Search";
 import Pagination from "../components/Pagination/Pagination";
-import axios from "axios";
-import qs from "qs";
 import { useSelector, useDispatch } from "react-redux";
 import { setCategory } from "../redux/slices/filterSlice.js";
-import { useEffect, useState, useRef, createContext } from "react";
-import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export const SearchContext = createContext("");
 
@@ -17,7 +15,6 @@ const Home = () => {
   const category = useSelector((state) => state.filter.category);
   const sortBy = useSelector((state) => state.filter.sortBy.sort);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const contentRef = useRef(null);
 
   const [searchValue, setSearchValue] = useState("");
@@ -40,27 +37,23 @@ const Home = () => {
   ));
 
   useEffect(() => {
-    axios
-      .get(
-        `https://67d9701c00348dd3e2ab1401.mockapi.io/Pizzas?page=${currentPage}&limit=8&${
-          category > 0 ? `category=${category}` : ""
-        }&sortBy=${sortBy}`
-      )
-      .then((res) => {
-        setItems(res.data);
-        setIsLoading(false);
-      })
-      .catch((error) => console.log("Error fetching data:", error));
-  }, [category, sortBy, currentPage]);
+    const fetchPizzas = async () => {
+      setIsLoading(true);
+      try {
+        const { data } = await axios.get(
+          `https://67d9701c00348dd3e2ab1401.mockapi.io/Pizzas?page=${currentPage}&limit=8&${
+            category > 0 ? `category=${category}` : ""
+          }&sortBy=${sortBy}`
+        );
 
-  useEffect(() => {
-    const queryString = qs.stringify({
-      sortBy,
-      category,
-      currentPage,
-    });
-    navigate(`?${queryString}`);
-    console.log(queryString);
+        setItems(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchPizzas();
   }, [category, sortBy, currentPage]);
 
   return (
