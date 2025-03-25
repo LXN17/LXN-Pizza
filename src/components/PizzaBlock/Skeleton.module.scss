@@ -1,0 +1,17 @@
+.skeleton {
+  width: 280px; /* По умолчанию */
+}
+
+@media (max-width: 768px) {
+  .skeleton {
+    width: 200px; /* Меньше ширина для мобильных экранов */
+    height: 350px;
+  }
+}
+
+@media (max-width: 480px) {
+  .skeleton {
+    width: 150px; /* Еще меньше для маленьких экранов */
+    height: 300px;
+  }
+}

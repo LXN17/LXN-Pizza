@@ -1,7 +1,5 @@
-import { Link } from "react-router-dom";
 import logo from "../assets/img/pizza-logo.svg";
-import { SearchContext } from "../App";
-import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Header = () => {
