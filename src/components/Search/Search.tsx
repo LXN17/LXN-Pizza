@@ -1,17 +1,17 @@
 import styles from "./Search.module.scss";
-import { useContext } from "react";
+import { useContext, ChangeEvent } from "react";
 import { SearchContext } from "../../pages/Home.tsx";
 
-const Search = () => {
+const Search: React.FC = () => {
   const { searchValue, setSearchValue } = useContext(SearchContext);
 
-  const inputHandler = (event) => {
+  const inputHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
   };
 
   return (
     <div className={styles.search}>
-      <label className="label" id="search">
+      <label className="label" htmlFor="search">
         Поиск...
       </label>
       <input

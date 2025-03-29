@@ -6,10 +6,15 @@ const Sort: React.FC = () => {
   const sortBy = useSelector(selectSort);
   const dispatch = useDispatch();
 
-  const sortRef = useRef(null);
+  const sortRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
 
-  const filterArr = [
+  type SortItem = {
+    name: string;
+    sort: string;
+  };
+
+  const filterArr: SortItem[] = [
     { name: "популярности", sort: "rating" },
     { name: "цене (по убыванию)", sort: `price&order=desc` },
     { name: "цене (по возрастанию)", sort: "price&order=asc" },
@@ -21,7 +26,7 @@ const Sort: React.FC = () => {
   }
 
   useEffect(() => {
-    const handleClick = (event: MouseEvent) => {
+    const handleClick = (event: any) => {
       if (!event.composedPath().includes(sortRef.current)) {
         setIsOpen(false);
       }

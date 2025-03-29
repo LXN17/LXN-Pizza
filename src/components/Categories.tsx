@@ -1,4 +1,9 @@
-const Categories: React.FC = ({ category, setCategory }) => {
+type CategoriesProps = {
+  category: number;
+  setCategory: any;
+};
+
+const Categories: React.FC<CategoriesProps> = ({ category, setCategory }) => {
   const categories = [
     "Все",
     "Мясные",

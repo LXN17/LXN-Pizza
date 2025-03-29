@@ -8,7 +8,10 @@ const Cart: React.FC = () => {
 
   const { items, totalPrice } = useSelector(selectCart);
 
-  let cartQuantity = items.reduce((sum, item) => sum + item.count, 0);
+  let cartQuantity = items.reduce(
+    (sum: number, item: any) => sum + item.count,
+    0
+  );
 
   const onClickClear = () => {
     dispatch(clearItems());

@@ -1,7 +1,7 @@
 import styles from "./NotFound.module.scss";
 import { Link } from "react-router-dom";
 
-const NotFound = () => {
+const NotFound: React.FC = () => {
   return (
     <>
       <h1 className={styles.notFound}>

@@ -5,16 +5,34 @@ import { Link } from "react-router-dom";
 
 const typeNames = ["тонкое", "традиционное"];
 
-const PizzaBlock: React.FC = ({
+interface PizzaBlockProps {
+  id: string;
+  title: string;
+  price: number;
+  imageUrl: string;
+  types: number[];
+  sizes: number[];
+}
+interface CartItem {
+  id: string;
+  title: string;
+  price: number;
+  imageUrl: string;
+  type: string;
+  size: number;
+  count?: number;
+}
+
+const PizzaBlock: React.FC<PizzaBlockProps> = ({
   id,
   title,
   price,
   imageUrl,
   types,
   sizes,
-}: any) => {
-  const [activeType, setActiveType] = useState(types[0]);
-  const [activeSize, setActiveSize] = useState(sizes[0]);
+}) => {
+  const [activeType, setActiveType] = useState<number>(types[0]);
+  const [activeSize, setActiveSize] = useState<number>(sizes[0]);
 
   const dispatch = useDispatch();
 
@@ -25,7 +43,7 @@ const PizzaBlock: React.FC = ({
   const addedCount = cartItem ? cartItem.count : 0;
 
   const onClickAdd = () => {
-    const item = {
+    const item: CartItem = {
       // Уникальный ID, если пользователь выберет одну пиццу с разными свойствами
       id: `${id}_${typeNames[activeType]}_${activeSize}`,
       title,

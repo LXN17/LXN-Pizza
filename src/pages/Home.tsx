@@ -9,18 +9,23 @@ import { useSelector, useDispatch } from "react-redux";
 import { setCategory } from "../redux/slices/filterSlice.js";
 import { fetchPizzas, selectPizzasData } from "../redux/slices/pizzasSlice.js";
 
-export const SearchContext = createContext("");
+interface SearchContextType {
+  searchValue: string;
+  setSearchValue: (value: string) => void;
+}
+
+export const SearchContext = createContext<SearchContextType | null>(null);
 
 const Home: React.FC = () => {
-  const category = useSelector((state) => state.filter.category);
-  const sortBy = useSelector((state) => state.filter.sortBy.sort);
+  const category: number = useSelector((state: any) => state.filter.category);
+  const sortBy: string = useSelector((state: any) => state.filter.sortBy.sort);
   const { items, status } = useSelector(selectPizzasData);
   const dispatch = useDispatch();
 
-  const [searchValue, setSearchValue] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
+  const [searchValue, setSearchValue] = useState<string>("");
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const scrollToContent = () => {
+  const scrollToContent = (): void => {
     if (status) {
       setTimeout(() => {
         window.scrollTo({
@@ -32,12 +37,12 @@ const Home: React.FC = () => {
   };
 
   const pizzas = items
-    .filter((item) =>
+    .filter((item: { title?: string }) =>
       item?.title?.toLowerCase().includes(searchValue.toLowerCase())
     )
-    .map((item) => <PizzaBlock key={item.id} {...item} />);
+    .map((item: { id: string }) => <PizzaBlock key={item.id} {...item} />);
 
-  const skeletons = [...new Array(4)].map((_, index) => (
+  const skeletons = Array.from({ length: 4 }, (_, index) => (
     <Skeleton key={index} />
   ));
 
@@ -59,7 +64,7 @@ const Home: React.FC = () => {
       <div className="content__top">
         <Categories
           category={category}
-          setCategory={(id) => dispatch(setCategory(id))}
+          setCategory={(id: number) => dispatch(setCategory(id))}
         />
         <Sort />
       </div>
@@ -75,8 +80,8 @@ const Home: React.FC = () => {
       </div>
 
       <Pagination
+        currentPage={currentPage}
         scrollToContent={scrollToContent}
-        pizzas={pizzas}
         setCurrentPage={setCurrentPage}
       />
     </div>
