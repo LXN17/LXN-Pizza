@@ -3,10 +3,8 @@ import Header from "./components/Header.js";
 import Home from "./pages/Home.js";
 import NotFound from "./pages/NotFound/NotFound.js";
 import Cart from "./pages/Cart.js";
-import { createContext } from "react";
+import FullPizza from "./components/FullPizza/FullPizza.js";
 import { Route, Routes } from "react-router-dom";
-
-export const SearchContext = createContext("");
 
 function App() {
   return (
@@ -16,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/pizza/:id" element={<FullPizza />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

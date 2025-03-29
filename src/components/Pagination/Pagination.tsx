@@ -1,7 +1,7 @@
 import styles from "./Pagination.module.scss";
 import ReactPaginate from "react-paginate";
 
-const Pagination = ({ scrollToContent, setCurrentPage }) => {
+const Pagination: React.FC = ({ scrollToContent, setCurrentPage }) => {
   return (
     <ReactPaginate
       className={styles.root}

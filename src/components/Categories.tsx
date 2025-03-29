@@ -1,4 +1,4 @@
-const Categories = ({ category, setCategory }) => {
+const Categories: React.FC = ({ category, setCategory }) => {
   const categories = [
     "Все",
     "Мясные",

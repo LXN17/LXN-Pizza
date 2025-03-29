@@ -7,14 +7,14 @@ import Pagination from "../components/Pagination/Pagination";
 import { useEffect, useState, createContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setCategory } from "../redux/slices/filterSlice.js";
-import { fetchPizzas } from "../redux/slices/pizzasSlice.js";
+import { fetchPizzas, selectPizzasData } from "../redux/slices/pizzasSlice.js";
 
 export const SearchContext = createContext("");
 
-const Home = () => {
+const Home: React.FC = () => {
   const category = useSelector((state) => state.filter.category);
   const sortBy = useSelector((state) => state.filter.sortBy.sort);
-  const { items, status } = useSelector((state) => state.pizzas);
+  const { items, status } = useSelector(selectPizzasData);
   const dispatch = useDispatch();
 
   const [searchValue, setSearchValue] = useState("");
