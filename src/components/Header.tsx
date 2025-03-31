@@ -2,12 +2,9 @@ import logo from "../assets/img/pizza-logo.svg";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCart } from "../redux/slices/cartSlice.ts";
-import { useEffect, useRef } from "react";
 
 const Header: React.FC = () => {
-  const { items, totalPrice } = useSelector(selectCart);
-
-  const isMounted = useRef(false);
+  const { items } = useSelector(selectCart);
 
   let cartQuantity = items.reduce(
     (sum: number, item: any) => sum + item.count,
