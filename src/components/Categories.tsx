@@ -1,3 +1,5 @@
+import { useWhyDidYouUpdate } from "ahooks";
+
 type CategoriesProps = {
   category: number;
   setCategory: any;

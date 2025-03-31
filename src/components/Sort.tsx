@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setSortBy, selectSort } from "../redux/slices/filterSlice.js";
+import { setSortBy, selectSort } from "../redux/slices/filterSlice.ts";
 
 const Sort: React.FC = () => {
   const sortBy = useSelector(selectSort);

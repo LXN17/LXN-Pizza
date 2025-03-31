@@ -3,7 +3,7 @@ import { useContext, ChangeEvent } from "react";
 import { SearchContext } from "../../pages/Home.tsx";
 
 const Search: React.FC = () => {
-  const { searchValue, setSearchValue } = useContext(SearchContext);
+  const { searchValue, setSearchValue } = useContext<any>(SearchContext);
 
   const inputHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);

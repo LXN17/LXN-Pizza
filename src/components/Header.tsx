@@ -1,13 +1,22 @@
 import logo from "../assets/img/pizza-logo.svg";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectCart } from "../redux/slices/cartSlice.js";
+import { selectCart } from "../redux/slices/cartSlice.ts";
+import { useEffect, useRef } from "react";
 
 const Header: React.FC = () => {
   const { items, totalPrice } = useSelector(selectCart);
 
+  const isMounted = useRef(false);
+
   let cartQuantity = items.reduce(
     (sum: number, item: any) => sum + item.count,
+    0
+  );
+
+  const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+  const initialTotalPrice = storedCart.reduce(
+    (sum: number, item: any) => sum + item.price * item.count,
     0
   );
 
@@ -27,7 +36,7 @@ const Header: React.FC = () => {
         {pathname !== "/cart" && (
           <div className="header__cart">
             <Link to="/cart" className="button button--cart">
-              <span>{totalPrice} ₽</span>
+              <span>{initialTotalPrice} ₽</span>
               <div className="button__delimiter"></div>
               <svg
                 width="18"
